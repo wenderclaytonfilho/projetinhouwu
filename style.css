@@ -1,0 +1,132 @@
+body {
+  background: linear-gradient(to bottom right, #ffe4ec, #ffc2e2);
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  color: #d63384;
+  position: relative;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 0 20px #ffb3d9;
+  max-width: 500px;
+  margin: auto;
+  z-index: 2;
+  position: relative;
+}
+
+button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background-color: #ff85c1;
+}
+
+#mensagemFofa {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+.secreto {
+  margin-top: 2rem;
+}
+
+#mensagemSecreta {
+  background-color: #fff0f6;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  background: pink;
+  position: absolute;
+  animation: float 4s linear infinite;
+  transform: rotate(45deg);
+  border-radius: 50% 50% 0 0;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: pink;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+.coraçao-secreto {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.coraçao-secreto:hover::after {
+  content: "Você é a batida mais bonita do meu coração.";
+  position: absolute;
+  bottom: 120%;
+  right: 0;
+  background: #fff;
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #0002;
+  white-space: nowrap;
+}
+.modo-secreto {
+  background: linear-gradient(135deg, #ffccff, #ccffff);
+  animation: brilhar 3s infinite alternate;
+}
+
+@keyframes brilhar {
+  from { filter: brightness(100%); }
+  to { filter: brightness(130%); }
+}
