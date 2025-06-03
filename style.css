@@ -130,3 +130,21 @@ button:hover {
   from { filter: brightness(100%); }
   to { filter: brightness(130%); }
 }
+.roleta-section {
+  margin-top: 2rem;
+}
+
+#roleta {
+  width: 200px;
+  height: 200px;
+  border: 4px solid #c8c1c4;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #f5d7e6;
+  background-color: white;
+}
+
+#resultadoRoleta {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}

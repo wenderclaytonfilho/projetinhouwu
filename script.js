@@ -85,3 +85,78 @@ document.addEventListener("keydown", e => {
   }
 });
 
+const opcoes = ["🎓 Faculdade", "📚 Estudar", "🧼 Lavar o cabelo"];
+const canvas = document.getElementById("roleta");
+const ctx = canvas.getContext("2d");
+const botaoGirar = document.getElementById("girarRoleta");
+const resultado = document.getElementById("resultadoRoleta");
+
+let anguloInicial = 0;
+let girando = false;
+
+function desenharRoleta() {
+  const raio = canvas.width / 2;
+  const centroX = canvas.width / 2;
+  const centroY = canvas.height / 2;
+  const anguloPorOpcao = (2 * Math.PI) / opcoes.length;
+
+  for (let i = 0; i < opcoes.length; i++) {
+    const anguloInicio = anguloInicial + i * anguloPorOpcao;
+    ctx.beginPath();
+    ctx.moveTo(centroX, centroY);
+    ctx.arc(centroX, centroY, raio, anguloInicio, anguloInicio + anguloPorOpcao);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.strokeStyle = "#d63384"; // contorno rosa fofo
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Texto
+    ctx.save();
+    ctx.translate(centroX, centroY);
+    ctx.rotate(anguloInicio + anguloPorOpcao / 2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#222"; // letra preta
+    ctx.font = "10px Comic Sans MS";
+    ctx.fillText(opcoes[i], raio - 5, 3);
+    ctx.restore();
+  }
+
+  // Indicador rosa
+  ctx.beginPath();
+  ctx.moveTo(centroX, 0);
+  ctx.lineTo(centroX - 5, 10);
+  ctx.lineTo(centroX + 5, 10);
+  ctx.closePath();
+  ctx.fillStyle = "#d63384";
+  ctx.fill();
+}
+
+function girar() {
+  if (girando) return;
+  girando = true;
+
+  let velocidade = Math.random() * 0.3 + 0.25;
+  let desaceleracao = 0.005;
+
+  function animar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    desenharRoleta();
+    anguloInicial += velocidade;
+    velocidade -= desaceleracao;
+
+    if (velocidade > 0) {
+      requestAnimationFrame(animar);
+    } else {
+      anguloInicial %= 2 * Math.PI;
+      const index = Math.floor(opcoes.length - (anguloInicial / (2 * Math.PI)) * opcoes.length) % opcoes.length;
+      resultado.innerText = `Resultado: ${opcoes[index]} 💡`;
+      girando = false;
+    }
+  }
+
+  animar();
+}
+
+desenharRoleta();
+botaoGirar.addEventListener("click", girar);
